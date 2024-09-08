@@ -32,6 +32,7 @@
             width: 80%;
             max-width: 300px;
             transition: background-color 0.3s, transform 0.2s;
+            position: relative;
         }
         .buttons button:hover {
             background-color: #ff4d94;
@@ -72,23 +73,32 @@
         </div>
     </div>
 
+    <audio id="bocaSong" src="https://www.mboxdrive.com/Boca.mp3"></audio> <!-- Canción de Boca Juniors -->
+
     <script>
         const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
         const card = document.getElementById('card');
         const options = document.querySelectorAll('.option');
+        const bocaSong = document.getElementById('bocaSong');
 
-        // Al pasar o tocar el botón "No", se mueve a una posición aleatoria.
+        // Evitar que el botón "No" se superponga con "Sí"
         noButton.addEventListener('touchstart', () => {
-            const offsetX = (Math.random() - 0.5) * window.innerWidth * 0.8; // Random value within 80% of the screen width
-            const offsetY = (Math.random() - 0.5) * window.innerHeight * 0.5; // Random value within 50% of the screen height
+            let offsetX, offsetY;
+            do {
+                offsetX = (Math.random() - 0.5) * window.innerWidth * 0.8; 
+                offsetY = (Math.random() - 0.5) * window.innerHeight * 0.5;  
+            } while (
+                Math.abs(offsetX) < 50 && Math.abs(offsetY) < 50 // Asegura que no se superpongan
+            );
             noButton.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         });
 
-        // Mostrar opciones al presionar "Sí"
+        // Mostrar opciones y reproducir canción al presionar "Sí"
         yesButton.addEventListener('click', () => {
             card.classList.remove('hidden');
             card.classList.add('visible');
+            bocaSong.play(); // Reproduce la canción de Boca Juniors
         });
 
         // Redirigir a WhatsApp al seleccionar una opción
