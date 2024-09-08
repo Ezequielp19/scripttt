@@ -53,9 +53,6 @@
         .card .buttons button {
             margin-bottom: 10px;
         }
-        .video-container {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -63,7 +60,7 @@
         <h1>Hola Bren, ¿te gustaría que empecemos de vuelta?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
-            <button id="no">No</button>
+            <button id="no" disabled>No</button>
         </div>
     </div>
 
@@ -76,40 +73,45 @@
         </div>
     </div>
 
-    <audio id="audio" src="https://youtu.be/0PMwgYXQhNk"></audio>
-
     <script>
         const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
         const card = document.getElementById('card');
         const options = document.querySelectorAll('.option');
-        const audio = document.getElementById('audio');
 
-        // Mostrar opciones, ocultar el botón "No" y reproducir el audio al presionar "Sí"
+        // Mostrar opciones al presionar "Sí" y ocultar el botón "No"
         yesButton.addEventListener('click', () => {
             card.classList.remove('hidden');
             card.classList.add('visible');
             noButton.style.display = 'none'; // Ocultar el botón "No"
-            audio.play(); // Reproducir el audio
         });
 
         // Redirigir a WhatsApp al seleccionar una opción
         options.forEach(option => {
             option.addEventListener('click', (e) => {
                 const selectedOption = e.target.getAttribute('data-option');
-                const message = `Hola Bren! Me gustaría que nos encontremos para: ${selectedOption}`;
+                const message = `Hola Eze! Me gustaría que nos encontremos para: ${selectedOption}`;
                 const whatsappUrl = `https://wa.me/3412714029?text=${encodeURIComponent(message)}`;
                 window.location.href = whatsappUrl;
             });
         });
 
-        // Mover el botón "No" a una nueva posición aleatoria al intentar hacer clic
-        noButton.addEventListener('mouseover', () => {
+        // Mover el botón "No" a una nueva posición aleatoria
+        function moveNoButton() {
             const randomX = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
             const randomY = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
             noButton.style.position = 'absolute';
             noButton.style.left = `${randomX}px`;
             noButton.style.top = `${randomY}px`;
+        }
+
+        // Mover el botón "No" cada vez que el ratón pasa sobre él
+        noButton.addEventListener('mouseover', moveNoButton);
+
+        // Asegurarse de que el botón "No" esté deshabilitado para que no se pueda presionar
+        noButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
         });
     </script>
 </body>
