@@ -55,10 +55,6 @@
         }
         .video-container {
             display: none;
-            margin-top: 20px;
-        }
-        .video-container.visible {
-            display: block;
         }
     </style>
 </head>
@@ -80,13 +76,6 @@
         </div>
     </div>
 
-    <div id="videoContainer" class="video-container">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/0PMwgYXQhNk?autoplay=1" 
-        title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
-    </div>
-
     <audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
     <script>
@@ -94,7 +83,6 @@
         const yesButton = document.getElementById('yes');
         const card = document.getElementById('card');
         const options = document.querySelectorAll('.option');
-        const videoContainer = document.getElementById('videoContainer');
         const audio = document.getElementById('audio');
 
         // Mostrar opciones, ocultar el botón "No" y reproducir el audio al presionar "Sí"
@@ -102,7 +90,6 @@
             card.classList.remove('hidden');
             card.classList.add('visible');
             noButton.style.display = 'none'; // Ocultar el botón "No"
-            videoContainer.classList.add('visible'); // Mostrar el video
             audio.play(); // Reproducir el audio
         });
 
@@ -127,4 +114,5 @@
     </script>
 </body>
 </html>
+
 
