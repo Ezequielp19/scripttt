@@ -5,22 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .card.hidden {
+            display: none;
+        }
+        .card.visible {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Pau, ¿vamos a la pieza a manosearnos?</h1>
+        <h1>Hola Bren, ¿te gustaría que empecemos de vuelta?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
             <button id="no">No</button>
         </div>
     </div>
 
-
-       <div id="card" class="card hidden">
-        <h2>¡Felicitaciones!</h2>
-        <p>Vamos a la piezaaaa</p>
+    <div id="card" class="card hidden">
+        <h2>Elige una opción</h2>
+        <div class="buttons">
+            <button class="option" data-option="Salida nocturna">Salida nocturna</button>
+            <button class="option" data-option="Parque domingo a la mañana">Parque domingo a la mañana</button>
+            <button class="option" data-option="Mates a la tarde">Mates a la tarde</button>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const card = document.getElementById('card');
+        const options = document.querySelectorAll('.option');
+
+        noButton.addEventListener('mouseover', () => {
+            const offsetX = (Math.random() - 0.5) * 300; // Random value between -150 and 150
+            const offsetY = (Math.random() - 0.5) * 100; // Random value between -50 and 50
+            noButton.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            card.classList.remove('hidden');
+            card.classList.add('visible');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                const selectedOption = e.target.getAttribute('data-option');
+                const message = `Hola Bren! Me gustaría que nos encontremos para: ${selectedOption}`;
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                window.location.href = whatsappUrl;
+            });
+        });
+    </script>
 </body>
 </html>
