@@ -31,7 +31,7 @@
             border-radius: 10px;
             width: 80%;
             max-width: 300px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .buttons button:hover {
             background-color: #ff4d94;
@@ -78,21 +78,24 @@
         const card = document.getElementById('card');
         const options = document.querySelectorAll('.option');
 
-        noButton.addEventListener('mouseover', () => {
-            const offsetX = (Math.random() - 0.5) * 200; // Random value between -100 and 100
-            const offsetY = (Math.random() - 0.5) * 50;  // Random value between -25 and 25
+        // Al pasar o tocar el botón "No", se mueve a una posición aleatoria.
+        noButton.addEventListener('touchstart', () => {
+            const offsetX = (Math.random() - 0.5) * window.innerWidth * 0.8; // Random value within 80% of the screen width
+            const offsetY = (Math.random() - 0.5) * window.innerHeight * 0.5; // Random value within 50% of the screen height
             noButton.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         });
 
+        // Mostrar opciones al presionar "Sí"
         yesButton.addEventListener('click', () => {
             card.classList.remove('hidden');
             card.classList.add('visible');
         });
 
+        // Redirigir a WhatsApp al seleccionar una opción
         options.forEach(option => {
             option.addEventListener('click', (e) => {
                 const selectedOption = e.target.getAttribute('data-option');
-                const message = `Hola Eze! Me gustaría que nos encontremos para: ${selectedOption}`;
+                const message = `Hola Bren! Me gustaría que nos encontremos para: ${selectedOption}`;
                 const whatsappUrl = `https://wa.me/3412714029?text=${encodeURIComponent(message)}`;
                 window.location.href = whatsappUrl;
             });
