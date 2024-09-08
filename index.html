@@ -76,9 +76,9 @@
         </div>
     </div>
 
-    <!-- El iframe está oculto, pero reproducirá el audio -->
+    <!-- Iframe oculto al inicio -->
     <iframe id="hiddenAudio" class="hidden-iframe" width="0" height="0" 
-        src="https://www.youtube.com/embed/0PMwgYXQhNk?autoplay=1&mute=0" 
+        src="https://www.youtube.com/embed/0PMwgYXQhNk?autoplay=1&mute=1" 
         frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
     <script>
@@ -88,12 +88,12 @@
         const options = document.querySelectorAll('.option');
         const hiddenAudio = document.getElementById('hiddenAudio');
 
-        // Mostrar opciones, ocultar el botón "No" y reproducir la canción cuando se presione "Sí"
+        // Mostrar opciones y reproducir el audio sin mostrar el video
         yesButton.addEventListener('click', () => {
             card.classList.remove('hidden');
             card.classList.add('visible');
             noButton.style.display = 'none'; // Ocultar el botón "No"
-            hiddenAudio.style.display = 'block'; // Mostrar el iframe (aunque sigue oculto visualmente)
+            hiddenAudio.src = hiddenAudio.src.replace('mute=1', 'mute=0'); // Habilitar el sonido
         });
 
         // Redirigir a WhatsApp al seleccionar una opción
@@ -108,3 +108,4 @@
     </script>
 </body>
 </html>
+
