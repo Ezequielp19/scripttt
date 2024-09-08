@@ -95,7 +95,7 @@
         options.forEach(option => {
             option.addEventListener('click', (e) => {
                 const selectedOption = e.target.getAttribute('data-option');
-                const message = `Hola Bren! Me gustaría que nos encontremos para: ${selectedOption}`;
+                const message = `Hola Eze! Me gustaría que nos encontremos para: ${selectedOption}`;
                 const whatsappUrl = `https://wa.me/3412714029?text=${encodeURIComponent(message)}`;
                 window.location.href = whatsappUrl;
             });
