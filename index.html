@@ -60,7 +60,7 @@
         <h1>Hola Bren, ¿te gustaría que empecemos de vuelta?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
-            <button id="no" disabled>No</button>
+            <button id="no">No</button>
         </div>
     </div>
 
@@ -96,7 +96,7 @@
             });
         });
 
-        // Mover el botón "No" a una nueva posición aleatoria
+        // Función para mover el botón "No" a una nueva posición aleatoria
         function moveNoButton() {
             const randomX = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
             const randomY = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
@@ -105,14 +105,20 @@
             noButton.style.top = `${randomY}px`;
         }
 
-        // Mover el botón "No" cada vez que el ratón pasa sobre él
+        // Mover el botón "No" cada vez que el ratón pasa sobre él o se intenta tocar
         noButton.addEventListener('mouseover', moveNoButton);
+        noButton.addEventListener('touchstart', moveNoButton); // Evento táctil para móviles
 
-        // Asegurarse de que el botón "No" esté deshabilitado para que no se pueda presionar
+        // Mover el botón "No" cada vez que lo intenten presionar
         noButton.addEventListener('click', (e) => {
             e.preventDefault();
-            e.stopPropagation();
+            moveNoButton();
         });
+
+        // Para asegurar que siempre se mueve al intentar hacer clic en él
+        setInterval(() => {
+            moveNoButton();
+        }, 1000); // Movimiento constante cada segundo
     </script>
 </body>
 </html>
