@@ -53,7 +53,7 @@
         .card .buttons button {
             margin-bottom: 10px;
         }
-        .audio-container {
+        .hidden-iframe {
             display: none;
         }
     </style>
@@ -76,21 +76,24 @@
         </div>
     </div>
 
-    <audio id="audioPlayer" src="https://www.youtube.com/embed/0PMwgYXQhNk?autoplay=1" class="audio-container"></audio>
+    <!-- El iframe está oculto, pero reproducirá el audio -->
+    <iframe id="hiddenAudio" class="hidden-iframe" width="0" height="0" 
+        src="https://www.youtube.com/embed/0PMwgYXQhNk?autoplay=1&mute=0" 
+        frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
     <script>
         const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
         const card = document.getElementById('card');
         const options = document.querySelectorAll('.option');
-        const audioPlayer = document.getElementById('audioPlayer');
+        const hiddenAudio = document.getElementById('hiddenAudio');
 
         // Mostrar opciones, ocultar el botón "No" y reproducir la canción cuando se presione "Sí"
         yesButton.addEventListener('click', () => {
             card.classList.remove('hidden');
             card.classList.add('visible');
             noButton.style.display = 'none'; // Ocultar el botón "No"
-            audioPlayer.play(); // Reproducir el audio
+            hiddenAudio.style.display = 'block'; // Mostrar el iframe (aunque sigue oculto visualmente)
         });
 
         // Redirigir a WhatsApp al seleccionar una opción
@@ -105,5 +108,3 @@
     </script>
 </body>
 </html>
-
-
